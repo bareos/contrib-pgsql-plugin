@@ -578,7 +578,8 @@ bRC pg_internal_conn ( bpContext *ctx, const char * sql ){
       db = PQconnectdb ( connstring );
       status = PQstatus ( db );
       if ( status == CONNECTION_BAD ){
-         DMSG0 ( ctx, D1, "pg_internal_conn.conndb failed!\n" );
+         char *error = PQerrorMessage(db);
+         DMSG1 ( ctx, D1, "pg_internal_conn.conndb failed %s!\n", error );
          JMSG0 ( ctx, M_WARNING, "pg_internal_conn.conndb failed!\n" );
          /* not all goes ok so we have to raise it, but it is not a critical error,
           * it should be handled by calling function */

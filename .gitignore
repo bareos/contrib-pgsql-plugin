@@ -19,3 +19,5 @@ Makefile
 
 # Editor Backup Files
 *~
+
+.idea
