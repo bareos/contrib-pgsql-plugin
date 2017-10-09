@@ -42,6 +42,8 @@ target_link_libraries(pgsql-archlog PUBLIC PQ bareos)
 add_executable(pgsql-restore pgsql-restore.c parseconfig.c keylist.c pgsqllib.c utils.c pluglib.c)
 target_link_libraries(pgsql-restore PUBLIC PQ bareos)
 
+get_filename_component ( RPATH ${LIBBAREOS_LA} DIRECTORY )
+set_target_properties ( pgsql-restore pgsql-archlog pgsql-fd PROPERTIES INSTALL_RPATH "${RPATH}" )
 
 install(TARGETS pgsql-fd pgsql-archlog pgsql-restore LIBRARY DESTINATION ${BAREOS_PLUGIN_DIR} RUNTIME DESTINATION sbin)
 install(FILES pgsql.conf DESTINATION etc/bareos/ RENAME pgsql.conf.example)
